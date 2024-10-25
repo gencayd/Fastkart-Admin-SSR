@@ -1,0 +1,22 @@
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { environment } from "../../../environments/environment";
+import { Params } from "../interface/core.interface";
+import { User, UserAddress, UserModel } from "../interface/user.interface";
+
+@Injectable({
+  providedIn: "root",
+})
+export class UserService {
+
+  constructor(private http: HttpClient) {}
+
+  getUsers(): Observable<UserModel> {
+    return this.http.get<UserModel>(`${environment.URL}/Users/getall`);
+  }
+
+  updateUser(payload?: Params): Observable<UserModel> {
+    return this.http.put<UserModel>(`${environment.URL}/user.json`, { params: payload });
+  }
+}
